@@ -15,3 +15,17 @@ th {
 tr {
     font-size: large;
 }
+
+.hide {
+    display: none;
+}
+
+#show_post {
+    border: solid 1px green;
+    border-radius: 10px;
+    box-shadow: 3px 5px;
+    width: 600px;
+    padding: 15px;
+    margin: 12% 30%;
+    font-size: large;
+}
