@@ -1,8 +1,17 @@
 table{
     border-collapse: collapse;
     width: 100%;
-    font-size: xx-large;
+    font-size: x-large;
+    text-align: center;
 }
 table, td, th{
     border: 1px solid red;
+}
+th {
+    font-style: normal;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 400 !important;
+}
+tr {
+    font-size: large;
 }
