@@ -16,13 +16,15 @@ getPosts()
 function displayPosts(posts) {
     posts.forEach(p => {
         const tbodyEl = document.getElementById('t_body');
-        tbodyEl.innerHTML = `
+        const row = `
             <tr>
                 <td>${p.id}</td>
                 <td>${p.userId}</td>
                 <td>${p.title}</td>
                 <td>${p.body}</td>
+                <td><button>Show</button><button>Edit</button><button>Delete</button></td
             </tr>
         `
+        tbodyEl.innerHTML += row; 
     });
 }
