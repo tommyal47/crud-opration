@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div>
+        <select name="" id="n_posts">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+            <option value="100">100</option>
+        </select>
+    </div>
     <table id="table">
         <thead>
             <tr>
@@ -20,6 +30,11 @@
         <tbody id="t_body">
         </tbody>
     </table>
+    <div>
+        <button id="p_page">Previous</button>
+        <span id="c_page">1</span>
+        <button id="n_page">Next</button>
+    </div>
     <section id="show_post" class="hide"></section>
     <section id="edit_post" class="hide">
         <label for="">title: </label>

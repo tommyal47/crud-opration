@@ -14,6 +14,15 @@ const titleEl = document.getElementById('p_title');
 const bodyEl = document.getElementById('p_body');
 const updateButton = document.getElementById('p_update')
 
+let currentPage = 1;
+const postsPerPageEl = document.getElementById('n_posts');
+let postsPerPage = document.getElementById('n_posts').value;
+
+let totalPages;
+
+
+
+// console.log(postsPerPage);
 
 let updateId = null;
 
@@ -25,7 +34,11 @@ function getPosts(){
     .then(posts => {
         // console.log(typeof(posts));
         allposts = posts;
-        displayPosts(allposts)
+        console.log("pokhjhhh",postsPerPage);
+        
+        totalPages = Math.ceil(allposts.length / postsPerPage);
+        displayPosts(currentPage);
+        setupPagination()
     })
     .catch(error => console.error('Error:', error));
 }
@@ -33,12 +46,26 @@ function getPosts(){
 getPosts()
 
 // display posts in table
-function displayPosts(posts) {
+function displayPosts(page) {
+    // posts to be shown depends on pagination
+    const startIndex = (page - 1) * postsPerPage
+    const endIndex = startIndex + Number(postsPerPage);
+    console.log(startIndex, endIndex);
+    console.log(postsPerPage);
+    
+    
+    postsToDisplay = allposts.slice(startIndex, endIndex);
+    console.log(startIndex, endIndex);
+    
+    // console.log(postsToDisplay);
+    
+    const tbodyEl = document.getElementById('t_body');
+    tbodyEl.innerHTML = ''
     tableEl.classList.remove('hide');
     postSection.classList.add('hide');
     postEl.classList.add('hide');
-    posts.forEach(p => {
-        const tbodyEl = document.getElementById('t_body');
+    
+    postsToDisplay.forEach(p => {
         const row = `
             <tr>
                 <td>${p.id}</td>
@@ -159,3 +186,69 @@ function cancelEdit(){
     postEl.classList.add('hide');
     tableEl.classList.remove('hide');
 }
+
+
+// setup pagination control 
+function setupPagination(){
+    // const totalPages = Math.ceil(allposts.length / postsPerPage);
+    console.log("total pages", totalPages);
+    
+
+    // locate current page element
+    const currentPageEl = document.getElementById('c_page');
+    
+    // handle previos button click
+    const previosButton = document.getElementById('p_page');
+    if (currentPage <= 1) {
+        previosButton.disabled = true;
+    }
+    // previosButton.disabled = currentPage == 1;
+    previosButton.addEventListener('click', () => {
+        console.log("clicked");
+        
+        currentPage--;
+        if (currentPage < totalPages) {
+            nextButton.disabled = false;
+        }
+        previosButton.disabled = currentPage == 1;
+        console.log("current page from previous", currentPage);
+        
+        displayPosts(currentPage);
+        // setupPagination();
+        currentPageEl.textContent = currentPage;
+    });
+    
+    // handle next button click
+    const nextButton = document.getElementById('n_page');
+    
+    
+    // nextButton.disabled = currentPage == totalPages;
+    nextButton.addEventListener('click', () => {
+        console.log("clicked");
+        currentPage++;
+        if (currentPage > 1) {
+            previosButton.disabled = false;
+        }
+        nextButton.disabled = currentPage == totalPages;
+        console.log("current page from next", currentPage);
+        displayPosts(currentPage);
+        console.log("total pages", totalPages);
+        // setupPagination();
+        currentPageEl.textContent = currentPage;
+    });
+}
+
+// update posts for page number
+// function updatePotsPerPage() {
+//     postsPerPage = postsPerPageEl.value;
+//     console.log(postsPerPage);
+    
+//     displayPosts(postsPerPage);
+// }
+postsPerPageEl.addEventListener('change', function (e) {
+    postsPerPage = e.target.value;
+    totalPages = Math.ceil(allposts.length / postsPerPage);
+    console.log(currentPage);
+    displayPosts(postsPerPage);
+    
+});
