@@ -20,9 +20,18 @@
         <tbody id="t_body">
         </tbody>
     </table>
-    <section id="show_post" class="hide">
-
+    <section id="show_post" class="hide"></section>
+    <section id="edit_post" class="hide">
+        <label for="">title: </label>
+        <input type="text" id="p_title"> <br>
+        <label for="">user id: </label>
+        <input type="text" id="p_userid"><br>
+        <label for="">body: </label>
+        <textarea name="" id="p_body"></textarea><br>
+        <button id="p_update" onclick="updatePost()">update</button>
+        <button id="p_cancel" onclick="cancelEdit()">cancel</button>
     </section>
-    <script src="script.js"></script>
+    <script src="script.js">
+    </script>
 </body>
 </html>
