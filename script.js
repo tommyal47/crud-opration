@@ -19,6 +19,8 @@ const postsPerPageEl = document.getElementById('n_posts');
 let postsPerPage = document.getElementById('n_posts').value;
 
 let totalPages;
+let startIndex;
+let endIndex;
 
 
 
@@ -48,8 +50,8 @@ getPosts()
 // display posts in table
 function displayPosts(page) {
     // posts to be shown depends on pagination
-    const startIndex = (page - 1) * postsPerPage
-    const endIndex = startIndex + Number(postsPerPage);
+    startIndex = (page - 1) * postsPerPage
+    endIndex = startIndex + Number(postsPerPage);
     console.log(startIndex, endIndex);
     console.log(postsPerPage);
     
@@ -248,7 +250,12 @@ function setupPagination(){
 postsPerPageEl.addEventListener('change', function (e) {
     postsPerPage = e.target.value;
     totalPages = Math.ceil(allposts.length / postsPerPage);
-    console.log(currentPage);
-    displayPosts(postsPerPage);
+    // startIndex = (currentPage - 1) * postsPerPage
+    // endIndex = startIndex + Number(postsPerPage);
     
+    // console.log(currentPage);
+    // console.log(postsPerPage);
+    currentPage = 1;
+    displayPosts(currentPage);
+    console.log("s: ",startIndex,"e: ", endIndex);
 });
