@@ -13,31 +13,26 @@ const useridEl = document.getElementById('p_userid');
 const titleEl = document.getElementById('p_title');
 const bodyEl = document.getElementById('p_body');
 const updateButton = document.getElementById('p_update')
-
 let currentPage = 1;
+
+// locate current page element
+const currentPageEl = document.getElementById('c_page');
 const postsPerPageEl = document.getElementById('n_posts');
 let postsPerPage = document.getElementById('n_posts').value;
-
+const previosButton = document.getElementById('p_page');
+const nextButton = document.getElementById('n_page');
 let totalPages;
 let startIndex;
 let endIndex;
-
-
-
-// console.log(postsPerPage);
-
 let updateId = null;
-
 let allposts;
+
 // get posts
 function getPosts(){
     fetch('https://jsonplaceholder.typicode.com/posts')
     .then(response => response.json())
     .then(posts => {
-        // console.log(typeof(posts));
         allposts = posts;
-        console.log("pokhjhhh",postsPerPage);
-        
         totalPages = Math.ceil(allposts.length / postsPerPage);
         displayPosts(currentPage);
         setupPagination()
@@ -52,15 +47,7 @@ function displayPosts(page) {
     // posts to be shown depends on pagination
     startIndex = (page - 1) * postsPerPage
     endIndex = startIndex + Number(postsPerPage);
-    console.log(startIndex, endIndex);
-    console.log(postsPerPage);
-    
-    
     postsToDisplay = allposts.slice(startIndex, endIndex);
-    console.log(startIndex, endIndex);
-    
-    // console.log(postsToDisplay);
-    
     const tbodyEl = document.getElementById('t_body');
     tbodyEl.innerHTML = ''
     tableEl.classList.remove('hide');
@@ -92,7 +79,7 @@ function getPost(id) {
     .then(post => showPost(post))
 }
 
-//desplay post
+//display post
 function showPost(post){
     tableEl.classList.add('hide');
     postSection.classList.remove('hide');
@@ -116,7 +103,7 @@ function deletePost(id){
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`,{
         method: 'DELETE'
     });
-    console.log("deleted");
+    // console.log("deleted");
 }
 
 //edit post
@@ -128,8 +115,8 @@ function editPost(post){
     postSection.classList.add('hide');
     postEl.classList.remove('hide');
     updateId = post.id;
-    console.log(updateId);
-    console.log(allposts[0]);
+    // console.log(updateId);
+    // console.log(allposts[0]);
     
     
 }
@@ -140,16 +127,16 @@ function updatePost(){
     let newUserid = useridEl.value;
     let newTitle = titleEl.value;
     let newBody = bodyEl.value;
-    console.log(newUserid, newTitle, newBody);
+    // console.log(newUserid, newTitle, newBody);
 
     let pos = allposts.find((p) => p.id === updateId)
     // console.log("to be updTED", pos);
     pos.userId = newUserid;
     pos.title = newTitle;
     pos.body = newBody;
-    console.log(allposts);
+    // console.log(allposts);
 
-    setTimeout(() =>console.log(allposts), 10000 )
+    // setTimeout(() =>console.log(allposts), 10000 )
     displayPosts(allposts);
     
     
@@ -192,70 +179,55 @@ function cancelEdit(){
 
 // setup pagination control 
 function setupPagination(){
-    // const totalPages = Math.ceil(allposts.length / postsPerPage);
-    console.log("total pages", totalPages);
-    
-
-    // locate current page element
-    const currentPageEl = document.getElementById('c_page');
-    
     // handle previos button click
-    const previosButton = document.getElementById('p_page');
     if (currentPage <= 1) {
         previosButton.disabled = true;
     }
-    // previosButton.disabled = currentPage == 1;
+    // handle next button click
+    
+    if (currentPage === totalPages) {
+        nextButton.disabled = true;
+    }
     previosButton.addEventListener('click', () => {
-        console.log("clicked");
-        
         currentPage--;
         if (currentPage < totalPages) {
             nextButton.disabled = false;
         }
         previosButton.disabled = currentPage == 1;
-        console.log("current page from previous", currentPage);
-        
         displayPosts(currentPage);
-        // setupPagination();
         currentPageEl.textContent = currentPage;
     });
-    
-    // handle next button click
-    const nextButton = document.getElementById('n_page');
-    
-    
-    // nextButton.disabled = currentPage == totalPages;
     nextButton.addEventListener('click', () => {
-        console.log("clicked");
         currentPage++;
         if (currentPage > 1) {
             previosButton.disabled = false;
         }
+        
         nextButton.disabled = currentPage == totalPages;
-        console.log("current page from next", currentPage);
         displayPosts(currentPage);
-        console.log("total pages", totalPages);
-        // setupPagination();
         currentPageEl.textContent = currentPage;
     });
 }
 
-// update posts for page number
-// function updatePotsPerPage() {
-//     postsPerPage = postsPerPageEl.value;
-//     console.log(postsPerPage);
-    
-//     displayPosts(postsPerPage);
-// }
+
 postsPerPageEl.addEventListener('change', function (e) {
     postsPerPage = e.target.value;
     totalPages = Math.ceil(allposts.length / postsPerPage);
-    // startIndex = (currentPage - 1) * postsPerPage
-    // endIndex = startIndex + Number(postsPerPage);
-    
-    // console.log(currentPage);
-    // console.log(postsPerPage);
     currentPage = 1;
+    currentPageEl.textContent = currentPage;
+    if (totalPages === 1){
+        nextButton.disabled = true;
+    }
+    else{
+        nextButton.disabled = false;
+    }
+    console.log(currentPage);
+    
+    if (currentPage === 1 ){
+        previosButton.disabled = true;
+    }
+    else{
+        previosButton.disabled = false;
+    }
     displayPosts(currentPage);
-    console.log("s: ",startIndex,"e: ", endIndex);
 });
