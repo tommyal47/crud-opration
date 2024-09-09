@@ -29,3 +29,33 @@ tr {
     margin: 12% 30%;
     font-size: large;
 }
+
+#edit_post {
+    border: solid 1px green;
+    border-radius: 10px;
+    box-shadow: 3px 5px;
+    width: 600px;
+    padding: 30px;
+    margin: 12% 30%;
+    font-size: large;
+}
+
+.ed_form {
+    margin: 7px;
+    font-size: large;
+    text-align: center;
+    /* margin-left: 15%; */
+}
+
+.ed_form input, textarea {
+    margin: 10px;
+    width: 200px;
+    font-size: x-large;
+
+}
+
+#c_btn {
+    margin-left: 80%;
+    font-size: x-large;
+}
+

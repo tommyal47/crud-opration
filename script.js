@@ -5,6 +5,9 @@ const tableEl = document.getElementById('table');
 // locate show section 
 const postSection = document.getElementById('show_post');
 
+//locate pagination 
+const paginationEl = document.getElementById('pagination');
+
 // locate edit section
 const postEl = document.getElementById('edit_post');
 
@@ -51,6 +54,9 @@ function displayPosts(page) {
     const tbodyEl = document.getElementById('t_body');
     tbodyEl.innerHTML = ''
     tableEl.classList.remove('hide');
+    paginationEl.classList.remove('hide');
+    postsPerPageEl.classList.remove('hide');
+    postSection.classList.remove('hide');
     postSection.classList.add('hide');
     postEl.classList.add('hide');
     
@@ -82,7 +88,9 @@ function getPost(id) {
 //display post
 function showPost(post){
     tableEl.classList.add('hide');
+    paginationEl.classList.add('hide');
     postSection.classList.remove('hide');
+    postsPerPageEl.classList.add('hide');
     postSection.innerHTML = `
         <h3>${post.title}</h3>
         <h5>User id: <span>${post.userId}</span></h5>
@@ -96,6 +104,8 @@ function showPost(post){
 function backToTable(){
     postSection.classList.add('hide');
     tableEl.classList.remove('hide');
+    postsPerPageEl.classList.remove('hide');
+    paginationEl.classList.remove('hide');
 }
 
 //delete post
@@ -112,6 +122,8 @@ function editPost(post){
     titleEl.value = post.title;
     bodyEl.value = post.body;
     tableEl.classList.add('hide');
+    paginationEl.classList.add('hide');
+    postsPerPageEl.classList.add('hide');
     postSection.classList.add('hide');
     postEl.classList.remove('hide');
     updateId = post.id;
@@ -137,7 +149,7 @@ function updatePost(){
     // console.log(allposts);
 
     // setTimeout(() =>console.log(allposts), 10000 )
-    displayPosts(allposts);
+    displayPosts(currentPage);
     
     
     
@@ -174,6 +186,8 @@ function updatePost(){
 function cancelEdit(){
     postEl.classList.add('hide');
     tableEl.classList.remove('hide');
+    paginationEl.classList.remove('hide');
+    postsPerPageEl.classList.remove('hide');
 }
 
 
