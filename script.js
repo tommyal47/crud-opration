@@ -113,6 +113,8 @@ function deletePost(id){
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`,{
         method: 'DELETE'
     });
+    alert("post deleted successfully")
+    displayPosts(currentPage)
     // console.log("deleted");
 }
 
@@ -134,7 +136,7 @@ function editPost(post){
 }
 
 //update post
-function updatePost(){
+function updatePost(id){
 
     let newUserid = useridEl.value;
     let newTitle = titleEl.value;
@@ -163,6 +165,7 @@ function updatePost(){
     //         userId: newUserid,
     //     })
     // })
+    // .then((response) =>console.log( response.json()));
     // console.log(updateId);
     // fetch(`https://jsonplaceholder.typicode.com/posts/${updateId}`, {
     //     method: 'PUT',
