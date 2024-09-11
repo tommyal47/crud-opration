@@ -1,4 +1,3 @@
-// locators
 // locate table
 const tableEl = document.getElementById('table');
 
@@ -101,6 +100,7 @@ function showPost(post){
     `
 }
 
+// return to the table
 function backToTable(){
     postSection.classList.add('hide');
     tableEl.classList.remove('hide');
@@ -115,7 +115,6 @@ function deletePost(id){
     });
     alert("post deleted successfully")
     displayPosts(currentPage)
-    // console.log("deleted");
 }
 
 //edit post
@@ -129,10 +128,6 @@ function editPost(post){
     postSection.classList.add('hide');
     postEl.classList.remove('hide');
     updateId = post.id;
-    // console.log(updateId);
-    // console.log(allposts[0]);
-    
-    
 }
 
 //update post
@@ -141,21 +136,13 @@ function updatePost(id){
     let newUserid = useridEl.value;
     let newTitle = titleEl.value;
     let newBody = bodyEl.value;
-    // console.log(newUserid, newTitle, newBody);
-
     let pos = allposts.find((p) => p.id === updateId)
-    // console.log("to be updTED", pos);
     pos.userId = newUserid;
     pos.title = newTitle;
     pos.body = newBody;
-    // console.log(allposts);
-
-    // setTimeout(() =>console.log(allposts), 10000 )
     displayPosts(currentPage);
-    
-    
-    
 
+    // update post using fetch API
     // fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
     //     method: 'PUT',
     //     body: JSON.stringify({
@@ -183,7 +170,6 @@ function updatePost(id){
     //     .then((json) => console.log(json));
     
 }
-// updateButton.addEventListener('click',updatePost(updateId));
 
 //cancel editing post
 function cancelEdit(){
@@ -226,7 +212,7 @@ function setupPagination(){
     });
 }
 
-
+// Display posts depends on the change in posts per page 
 postsPerPageEl.addEventListener('change', function (e) {
     postsPerPage = e.target.value;
     totalPages = Math.ceil(allposts.length / postsPerPage);
