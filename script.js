@@ -199,6 +199,7 @@ function setupPagination(){
         previosButton.disabled = currentPage == 1;
         displayPosts(currentPage);
         currentPageEl.textContent = currentPage;
+        goUp()
     });
     nextButton.addEventListener('click', () => {
         currentPage++;
@@ -209,6 +210,7 @@ function setupPagination(){
         nextButton.disabled = currentPage == totalPages;
         displayPosts(currentPage);
         currentPageEl.textContent = currentPage;
+        goUp()
     });
 }
 
@@ -234,3 +236,12 @@ postsPerPageEl.addEventListener('change', function (e) {
     }
     displayPosts(currentPage);
 });
+
+// go up
+function goUp() {
+    window.scroll({
+        top: 0,
+        behavior: 'smooth'
+      });
+      
+}
