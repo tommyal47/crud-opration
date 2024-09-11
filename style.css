@@ -1,18 +1,27 @@
-table{
-    border-collapse: collapse;
+.table-container{
     width: 70%;
     font-size: x-large;
     text-align: center;
     margin-left: 15%;
     margin-top: 10%;
-}
-table, td, th{
     border: 1px solid red;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+table{
+    border-collapse: collapse;
+    
+}
+td, th{
+    border: 1px solid red;
+    padding: 4px;
 }
 th {
     font-style: normal;
     font-family: 'Courier New', Courier, monospace;
-    font-weight: 400 !important;
+    /* font-weight: 400 !important; */
+    font-weight: bold;
 }
 tr {
     font-size: large;
@@ -72,3 +81,21 @@ tr {
     margin-top: 5px;
 }
 
+button {
+    border-radius: 7px;
+    border: none;
+    transition: background-color 0.3s ease;
+    /* font-size: 16px; */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green */
+    color: #fff; /* Change text color (optional) */
+    transform: scale(1.1); /* Slightly enlarge the button */
+}
+
+i {
+    cursor: pointer;
+
+    
+}

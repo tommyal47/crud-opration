@@ -67,9 +67,9 @@ function displayPosts(page) {
                 <td>${p.title}</td>
                 <td>${p.body}</td>
                 <td>
-                <button onclick="getPost(${p.id})">Show</button>
-                <button onclick='editPost(${JSON.stringify(p)})'>Edit</button>
-                <button onclick="deletePost(${p.id})">Delete</button>
+                <i class="fa-solid fa-eye" onclick="getPost(${p.id})"></i>
+                <i class="fa-solid fa-pen-to-square" onclick='editPost(${JSON.stringify(p)})'></i>
+                <i class="fa-solid fa-trash" onclick="deletePost(${p.id})"></i>
                 </td>
             </tr>
         `
