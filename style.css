@@ -3,8 +3,8 @@ table{
     width: 70%;
     font-size: x-large;
     text-align: center;
-    margin-left: 10%;
-    margin-top: 5%;
+    margin-left: 15%;
+    margin-top: 10%;
 }
 table, td, th{
     border: 1px solid red;
@@ -62,13 +62,13 @@ tr {
 }
 
 #n_posts {
-    margin-left: 10%;
+    margin-left: 15%;
     margin-top: -28px;
     position: absolute;
 }
 
 #pagination {
-    margin-left: 10%;
+    margin-left: 15%;
     margin-top: 5px;
 }
 
